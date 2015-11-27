@@ -1,53 +1,62 @@
-# Basic website generator.  
+[![Stories in Ready](https://badge.waffle.io/code-computerlove/node-static-site-generator.png?label=ready&title=Ready)](https://waffle.io/code-computerlove/node-static-site-generator)
+[![devDependency Status](https://david-dm.org/code-computerlove/node-static-site-generator/dev-status.svg)](https://david-dm.org/code-computerlove/node-static-site-generator#info=devDependencies)
+[![Dependency Status](https://david-dm.org/code-computerlove/node-static-site-generator.svg)](https://david-dm.org/code-computerlove/node-static-site-generator)
 
-Get yourself going with a ready made basic website setup.
+# Basic static website generator [![Build Status](https://travis-ci.org/code-computerlove/node-static-site-generator.svg?branch=master)](https://travis-ci.org/code-computerlove/node-static-site-generator)
 
-This repository holds the standard SASS, JavaScript and Testing suit for any website at start level.
+> Get yourself going with a ready made basic static website setup
 
-The site uses [Gulp](https://www.google.com) as a task runner.
+This repository holds the standard Sass, JavaScript and Testing suite to act as development base.
 
-The site is setup to use Harry Roberts [csswizardry's](https://github.com/csswizardry) ITCSS (inverted triangle) methodology. See [Managing CSS Projects with ITCSS](https://speakerdeck.com/dafed/managing-css-projects-with-itcss) for further details.
+The site uses [Gulp](http://gulpjs.com) as a task runner along with a few [3rd party tools](docs/3rd-party-plugins.md).
 
-This setup will enable you to run a local node server based instance of a website. Through the use of handlebars templating you will be able to publish your website out into pre-compiled static HTML files.
-It also gives you the ability to package the site up with all the necessarry files.
+This setup will enable you to run a local node server instance of a website. Through the use of [Handlebars](http://handlebarsjs.com) templating you will be able to compile your website into pre-compiled static HTML files.
+
+It also gives you the ability to package the site up with all the necessary files.
 
 ## Installation
 
-Do one of the following
-
-* Clone the git repo - git@github.com:andrewbrandwood/node-static-site-generator.git
-then...	  
-
-### Gulp (Client side setup).
-
+* Clone the repo - `https://github.com/code-computerlove/node-static-site-generator.git`
 * Open a new command prompt (or Terminal on mac).
 * Navigate to the folder
-* run - npm install (sudo may be required for mac)
-* run - gulp
-* run - node website.js
+* Run the following commands
+    * `npm install` (sudo may be required for mac)
+    * `gulp`
+    * `gulp serve` - this will open a local instance of the site for you ([See 'Viewing your site'](#viewing-your-site))
 
-### production and release files.
+Optional setup details can be found in [Welcome](docs/welcome.md)
 
-* run - gulp build --prod
-* run - gulp release --prod
+#### Production and release files.
 
-adding "--prod" after any command will compress and minify the relevant files.
+If you need to compile your templates
 
-### viewing your site
-An index has page has puprposely been ommited from this setup to encourage you to build from a styleguide.
+* `gulp build --prod`. This will do a full build (HTML compile, style compilation, minification) and output in the `build` folder.
+* `gulp release --prod`. This will do the same as the above build task but also package all assets into a zip file in the `release` folder.
 
-navigate to http://localhost:3001
+adding `--prod` after any command will compress and minify the relevant files.
 
-or
+## Viewing your site
 
-if you have run build you can navigate to the build folder and open the static HTML files
+An index has page has purposely been omitted from this setup to encourage you to build from a styleguide.
 
-### 3rd party plugin notes.
+Ensure you have a local server instance running using `gulp serve`. This creates a local instance of the site and a browser sync instance which proxies off of this.
 
-#### [gulp-sass-generate-contents](https://github.com/andrewbrandwood/gulp-sass-generate-contents)
-To enable the compiling of a list of contents in the main scss file and to import all the correct files.  It is required to have a comment at the top of each sass file. 
+[Browser Sync](http://www.browsersync.io/) is a tool that allows for painless device testing using a host machine and accessed on port `http://localhost:7000` locally with external devices able to connect to it through the host's ip that is displayed on screen e.g.`192.168.0.1:7000`. Using Browser Sync, any scroll or page interactions are mirrored on all devices and pages are reloaded whenever styles are changed.
 
-anything on the first line other than a double slash // will result in the file being ignored from the contents and the imports. (see options to change this)
+The local server can be accessed directly via `http://localhost:3001`
 
-#### [run-sequence](https://www.npmjs.com/package/run-sequence)
-Gulp is an asynchronous task runner.  We need the gulp-sass-generate-contents to run and complete before we can compile the sass.  The run-sequence plugin allows us to run the contents file before compiling our SASS. 
+If you have run the `gulp build` task you can navigate to the build folder and open the static HTML files.
+
+## Building your site
+
+#### HTML Template Data
+
+Template data is stored in the `templateData.json` file located in `_config` folder. Anything stored in this file is piped to the handlebars templates under the `data` namespace. If you want to output the value of the key `pageHeading` this would be done via `{{ data.pageHeading }}` (The double brackets tell handlebars to output a dynamic value). As this file is standard json - arrays and objects can be added and used for template loops, passed to partials etc without issue.
+
+## Coding Standards
+
+* [ITCSS (Inverted Triangle CSS)](https://speakerdeck.com/dafed/managing-css-projects-with-itcss)
+
+## Contributing
+
+* [Testing](docs/contributing/testing.md)

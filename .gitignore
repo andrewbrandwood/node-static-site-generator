@@ -5,3 +5,5 @@ logfile.txt
 build
 release
 *.css
+main.scss
+_tools.sprites.scss

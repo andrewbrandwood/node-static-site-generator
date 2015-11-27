@@ -5,6 +5,7 @@ module.exports = function(){
 
 		return [
 			srcStyles + '/_settings/*.scss', 
+			'!' + srcStyles + '/_settings/_settings.old-ie-8.scss', 
 			srcStyles + '/_tools/_tools.mixins.scss', 
 			srcStyles + '/_tools/_tools.functions.scss', 
 			srcStyles + '/_tools/*.scss', 

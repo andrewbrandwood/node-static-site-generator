@@ -1,16 +1,22 @@
+var path = require('path');
+var templateData = require(path.resolve(__dirname, '..', '_config', 'templateData.json'));
+var templateHelpers = require(path.resolve(__dirname, '..', '_config', 'templateHelpers.js'))();
+
 var WebsiteController = function (website) {
 	// Public functions
 	var website = website;
 	this.get = function(request, response) {
 		if (!request.body) return response.sendStatus(400);
-		var url = parseUrl(request.params.loc);
+		var url = parseUrl(request.params[0]);
 		
 		response.render(url, createModel());
 	};
 
 	function createModel(params){
 		var model = {
-			layout: false
+			layout: false,
+			data: templateData,
+			helpers: templateHelpers
 		}
 
 		return model;
@@ -18,8 +24,8 @@ var WebsiteController = function (website) {
 
 	function parseUrl(url){
 		if(url === '/' || url === '' || url === undefined || url === 'favicon.ico'){
-			// change to index or homepage when ready to work on site pages
-			url = 'styleguide'
+			// this acts as the default view file when working locally
+			url = 'index'
 		}
 		return url;
 	}
@@ -28,6 +34,6 @@ var WebsiteController = function (website) {
 
 module.exports = function(website) {
 	var controller = new WebsiteController(website);
-	website.get(['/','/:loc'], controller.get);
+	website.get(['/*','/:loc'], controller.get);
 
 };

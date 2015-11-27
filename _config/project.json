@@ -10,5 +10,6 @@
         "fonts": 	"fonts",
         "reports": 		"reports"
     },
-    "pixelBase": "16px"
+    "pixelBase": "16px",
+    "pixelBaseNoUnit": 16
 }

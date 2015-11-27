@@ -82,6 +82,13 @@ $old-ie-8: false !default;
     }
 }
 
+@mixin old-ie8-scaled-svg($d-px-target) {
+    @if $old-ie-8 {
+        font-size: 1rem;
+        zoom: ($d-px-target/$d-px);
+    }
+}
+
 // Generate a font-size and baseline-compatible line-height.
 
 @mixin font-size($font-size, $line-height: auto) {
